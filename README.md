@@ -1,5 +1,4 @@
 # BlackJackProject
-Our Java Project
 Hello! This is our small JAVA project for our University
 It's being made by me and my project buddy to display our understanding of JAVA and certain data structures that are being used in this project.
 A Blackjack game has many logical components that need to be implemented so we decided to tackle this task and tried to create our own little game.
