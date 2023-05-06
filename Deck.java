@@ -2,8 +2,9 @@ import java.util.*;
 import java.math.*;
 
 public class Deck {
-    public Map<Card, Integer> cards;//This is our deck.
     // It is a hashmap which has a card as a key and an integer as a value.
+    public Map<Card, Integer> cards;//This is our deck.
+
     public static final int NUM_SUITS = 4;
     public static final int NUM_RANKS = 13;//Avoid magic numbers
     public Deck() {
@@ -35,10 +36,11 @@ public class Deck {
         for (Card card : cards.keySet()) {
             count += cards.get(card);
         }
-        return count;//We loop through the deck and add the number of cards to the count.
+        return count;
     }
 
-    public Card draw () {//This method draws a card from the deck. It will be used to give the player and dealer cards.
+    public Card draw () {
+        //This method draws a card from the deck. It will be used to give the player and dealer cards.
         Card card = cards.keySet().iterator().next();
         //We get the first card from the deck and remove it from the deck.
         // So we have no duplicates.
