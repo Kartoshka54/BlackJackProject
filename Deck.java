@@ -11,6 +11,7 @@ public class Deck {
         cards = new HashMap<>();
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
         String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+        //List created to use the pre-existing shuffle method in java.
         List<Card> shuffle = new ArrayList<>();
         for (int i = 0; i < NUM_SUITS; i++) {
             for (int j = 0; j < NUM_RANKS; j++) {
@@ -20,11 +21,12 @@ public class Deck {
                 shuffle.add(card);
             }
         }
-        Collections.shuffle(shuffle);//The collections.shuffle method uses the Fisher-Yates shuffle algorithm to shuffle the deck.
+        //The collections.shuffle method uses the Fisher-Yates shuffle algorithm to shuffle the deck.
         //We initially did not know that such a method in java exists,
         // so instead of implementing an algorithm by ourselves we made efficient use of the library
         //We also had some ideas to implement a shuffle method with math.random using for loops,
         // but this project is already big enough, so we did not want to make it even bigger.
+        Collections.shuffle(shuffle);
         for (Card card : shuffle) {
             cards.put(card, cards.getOrDefault(card, 0) + 1);
         }
