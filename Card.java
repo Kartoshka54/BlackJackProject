@@ -4,7 +4,6 @@ public class Card {
     // For example: Hearts, Diamonds, Clubs, Spades.
     private String suit;
     //The rank is the number which the card has.
-    //Bla bla
     private String rank;
     public static final int ACE_VALUE = 11;
     public static final int FACE_CARD_VALUE = 10;//Avoid magic numbers
