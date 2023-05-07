@@ -9,55 +9,42 @@ public class BlackJackMethods {
     Stack<Card> dealerHand = new Stack<>();
     private static final int WIN_CONDITION = 21;
     private static final int DEALER_RULE = 17;
+
     //This method will be used to determine the turn order.
-    /*public void turnOrder(String player, String dealer) {
+    public void turnOrder(String player, String dealer) {
         //We simply utilize our queue data structure to keep track of the turns.
         Qll playerTurn = new Qll();
         playerTurn.enqueue("player");
+        hit();
+        playerHandValue();
         //This while loop will keep the game going until the player runs out of chips.
-        while (chipStacks.total() > 0) {//TODO: Change if to switch case
+        while (chipStacks.total() > 0) {
             int totalMoney = chipStacks.total();
             if (playerTurn.getFront() == player) {
                 System.out.println("It is your turn, hit or stand? (h/s)");
                 String choice = sc.nextLine();
                 if (choice.equals("h")) {
-                    hit();
                     playerHandValue();
                 } else if (choice.equals("s")) {
                     stand();
-
-                } else if (chipStacks.total() == 0 || playerHandValue() >= 21) {
+                } else if (chipStacks.total() == 0 || playerHandValue() >= WIN_CONDITION) {
                     System.out.println("You lost! Wanna try again ;).");
-
-                } else if (playerHand.size() == 21 || playerHand.size() > dealerHand.size()) {
-                    if (playerHand.size() == 21) {
-                        System.out.println("Congratulations! You won!");
-
-
-                    } else if (dealerHand.size() == 21) {
-                        System.out.println("Bust!)");
-
-                    }
-
-                } else {
-                    System.out.println("Invalid input, try again.");
                 }
-                //This deletes player from the queue and makes dealer the new front
-                //So the dealer gets to play on the next iteration of the loop.
-                playerTurn.deleteQueue();
-                playerTurn.enqueue("dealer");
             } else {
-
-                dealerTurn();
-
-                playerTurn.deleteQueue();
-                //Player is added so the other condition is met on the next loop.
-                //Now we have a nice and simple method to keep track of our turns :)!
-                playerTurn.enqueue("player");
-
+                System.out.println("Invalid input, try again.");
             }
+            playerTurn.deleteQueue();
+            playerTurn.enqueue("dealer");
 
-        }*/
+            // The closing curly brace for the while loop should be here.
+            // The code below should be inside the while loop, not outside.
+            if (chipStacks.total() == 0) {
+                dealerTurn();
+                playerTurn.deleteQueue();
+                playerTurn.enqueue("player");
+            }
+        }
+    }
 
 
 
@@ -84,7 +71,8 @@ public class BlackJackMethods {
         int handValue = hit();
         System.out.print("Your hand contains: ");
         int aceCount = 0;
-        int convertedAceCount = 0; // keep track of the number of aces that have been converted to a value of 1
+        // keep track of the number of aces that have been converted to a value of 1
+        int convertedAceCount = 0;
         for (int i = 0; i < playerHand.size(); i++) {
             Card c = playerHand.get(i);
             if (c.getRank() == "Ace") {
@@ -95,7 +83,7 @@ public class BlackJackMethods {
                         System.out.println("\nYour first ace of " + c.getSuit() + " remains 11");
                     } else {
                         c.setValue(1);
-                        System.out.println("\nYour " + (convertedAceCount + 1) + "th ace of " + c.getSuit() + " has been changed to 1");
+                        System.out.println("\nYour " + (convertedAceCount + 1) + "the ace of " + c.getSuit() + " has been changed to 1");
                     }
                     convertedAceCount++;
                 }
