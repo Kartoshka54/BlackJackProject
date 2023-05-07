@@ -10,7 +10,7 @@ public class BlackJackMethods {
     private static final int WIN_CONDITION = 21;
     private static final int DEALER_RULE = 17;
     //This method will be used to determine the turn order.
-    public void turnOrder(String player, String dealer) {
+    /*public void turnOrder(String player, String dealer) {
         //We simply utilize our queue data structure to keep track of the turns.
         Qll playerTurn = new Qll();
         playerTurn.enqueue("player");
@@ -57,9 +57,9 @@ public class BlackJackMethods {
 
             }
 
-        }
+        }*/
 
-    }
+
 
 
     //Hit method for the player, used to draw cards from the deck
@@ -79,14 +79,28 @@ public class BlackJackMethods {
     public void stand() {
         System.out.println("You have chosen to stand. Now only luck can save you!");
     }
-    //A simple method to print our hand,
-    // I wanted to make it a separate method to keep the code clean.
+    //This method also converts the ace value
     public int playerHandValue() {
         int handValue = hit();
         System.out.print("Your hand contains: ");
+        int aceCount = 0;
+        int convertedAceCount = 0; // keep track of the number of aces that have been converted to a value of 1
         for (int i = 0; i < playerHand.size(); i++) {
             Card c = playerHand.get(i);
-            System.out.print(c.getRank() + ", ");
+            if (c.getRank() == "Ace") {
+                aceCount++;
+                if (handValue > 21 && aceCount >= 2 && convertedAceCount < 2) {
+                    if (convertedAceCount == 0) {
+                        // always keep the first ace with a value of 11
+                        System.out.println("\nYour first ace of " + c.getSuit() + " remains 11");
+                    } else {
+                        c.setValue(1);
+                        System.out.println("\nYour " + (convertedAceCount + 1) + "th ace of " + c.getSuit() + " has been changed to 1");
+                    }
+                    convertedAceCount++;
+                }
+            }
+            System.out.print(c.getRank() + " of " + c.getSuit() + " ");
         }
         System.out.println("\nTotal value: " + handValue);
         return handValue;
