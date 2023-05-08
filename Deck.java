@@ -3,10 +3,12 @@ import java.math.*;
 
 public class Deck {
     // It is a hashmap which has a card as a key and an integer as a value.
-    public Map<Card, Integer> cards;//This is our deck.
+    //This is our deck.
 
+    public Map<Card, Integer> cards;
+    //Avoid magic numbers
     public static final int NUM_SUITS = 4;
-    public static final int NUM_RANKS = 13;//Avoid magic numbers
+    public static final int NUM_RANKS = 13;
     public Deck() {
         cards = new HashMap<>();
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};

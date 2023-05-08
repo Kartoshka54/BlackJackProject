@@ -5,8 +5,9 @@ public class Card {
     private String suit;
     //The rank is the number which the card has.
     private String rank;
+    //Avoid magic numbers
     public static final int ACE_VALUE = 11;
-    public static final int FACE_CARD_VALUE = 10;//Avoid magic numbers
+    public static final int FACE_CARD_VALUE = 10;
 
     //The value helper is used to define the value of each card.
     // For example: Ace is 11, King, Queen and Jack are 10, and the rest are their own value.
