@@ -16,8 +16,8 @@ public class BlackJackMethods {
         Qll playerTurn = new Qll();
         playerTurn.enqueue("player");
         hit();
-        hit();
         playerHandValue();
+
         //This while loop will keep the game going until the player runs out of chips.
         while (chipStacks.total() > 0) {//TODO: Change if to switch case
             int totalMoney = chipStacks.total();
@@ -29,7 +29,7 @@ public class BlackJackMethods {
                 } else if (choice.equals("s")) {
                     stand();
 
-                } else if (chipStacks.total() == 0 || playerHandValue() >= 21) {
+                } else if (chipStacks.total() == 0 || playerHandValue() >= WIN_CONDITION) {
                     System.out.println("You lost! Wanna try again ;).");
 
                 } else if (playerHand.size() == 21 || playerHand.size() > dealerHand.size()) {
@@ -37,7 +37,7 @@ public class BlackJackMethods {
                         System.out.println("Congratulations! You won!");
 
 
-                    } else if (dealerHand.size() == 21) {
+                    } else if (dealerHand.size() == WIN_CONDITION) {
                         System.out.println("Bust!)");
 
                     }
@@ -50,9 +50,7 @@ public class BlackJackMethods {
                 playerTurn.deleteQueue();
                 playerTurn.enqueue("dealer");
             } else {
-
                 dealerTurn();
-
                 playerTurn.deleteQueue();
                 //Player is added so the other condition is met on the next loop.
                 //Now we have a nice and simple method to keep track of our turns :)!
@@ -67,8 +65,7 @@ public class BlackJackMethods {
         public int hit() {
             Card card = deck.draw();
             playerHand.push(card);
-            int value = aceCheck(playerHand);
-            return value;
+            return aceCheck(playerHand);
         }
         //This method will be used to end the player's turn.
         public void stand () {
@@ -92,17 +89,11 @@ public class BlackJackMethods {
         //Of course we will make the dealer harder to beat as the money value of the player increases, he might even cheat ;).
         public void dealerTurn () {
 
-            while (dealerHandValue() <= 17) {
-                Card dealerCard = deck.draw();
-                dealerHand.push(dealerCard);
-                for (int i = 0; i < dealerHand.size(); i++) {
-                    Card c = dealerHand.get(i);
-                    System.out.print(c.getRank() + ", ");
-                    break;
-
-                }
-
-            }
+        if(dealerHandValue() <= DEALER_RULE) {
+            dealerHandValue();
+        }else {
+            System.out.println("The dealer has decided to stand");
+        }
 
     }
     public int dealerHandValue() {
