@@ -1,3 +1,5 @@
+package CardClasses;
+
 public class QueueNode {
     /*This is our foundation for our data structures that we are going to use for this project
     we did not want to use pre-written libraries to not only better modify the structures for our needs but

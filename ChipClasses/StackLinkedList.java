@@ -1,3 +1,5 @@
+package ChipClasses;
+
 public class StackLinkedList {
     //add chip sum
     //write a method to count the chip values; 300x2, 500x4 etc.
@@ -58,7 +60,7 @@ public class StackLinkedList {
 
 /*
     public void traverse(){
-        StackNode current = top;
+        ChipClasses.StackNode current = top;
         while(current != null){
             System.out.println(current.getChipValue());
             current = current.getLink();
