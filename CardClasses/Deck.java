@@ -1,5 +1,8 @@
+package CardClasses;
+
+import CardClasses.Card;
+
 import java.util.*;
-import java.math.*;
 
 public class Deck {
     // It is a hashmap which has a card as a key and an integer as a value.

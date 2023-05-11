@@ -1,3 +1,8 @@
+package ChipClasses;
+
+import ChipClasses.StackLinkedList;
+import ChipClasses.StackNode;
+
 public class ChipStacks {
     // for low to high ?
     // 1 valued chips ??

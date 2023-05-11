@@ -1,3 +1,5 @@
+package CardClasses;
+
 //This is our card class. This is the place where we define the rank, suit and value of each card.
 public class Card {
     //The suit of the card is the symbol which is on it.

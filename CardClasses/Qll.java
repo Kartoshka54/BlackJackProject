@@ -1,3 +1,7 @@
+package CardClasses;
+
+import CardClasses.QueueNode;
+
 public class Qll {
     /*This will be our queue data structure and will be implemented using linked lists. Why linked lists?
     Because we can not be sure how many turns there are going to be so linked lists give us the flexibility
