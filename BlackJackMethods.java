@@ -66,32 +66,32 @@ public class BlackJackMethods {
         }
 
     }
-        //Hit method for the player, used to draw cards from the deck
-        public int hit() {
-            Card card = deck.draw();
-            playerHand.push(card);
-            return aceCheck(playerHand);
-        }
-        //This method will be used to end the player's turn.
-        public void stand () {
-            System.out.println("You have chosen to stand. Now only luck can save you!");
-        }
-        //This method also converts the ace value
-        public int playerHandValue () {
-            int handValue = hit();
-            System.out.print("Your hand contains: ");
-            for (int i = 0; i < playerHand.size(); i++) {
-                Card c = playerHand.get(i);
-                System.out.print(c.getRank() + " of " + c.getSuit() + " ");
+    //Hit method for the player, used to draw cards from the deck
+    public int hit() {
+        Card card = deck.draw();
+        playerHand.push(card);
+        return aceCheck(playerHand);
+    }
+    //This method will be used to end the player's turn.
+    public void stand () {
+        System.out.println("You have chosen to stand. Now only luck can save you!");
+    }
+    //This method also converts the ace value
+    public int playerHandValue () {
+        int handValue = hit();
+        System.out.print("Your hand contains: ");
+        for (int i = 0; i < playerHand.size(); i++) {
+            Card c = playerHand.get(i);
+            System.out.print(c.getRank() + " of " + c.getSuit() + " ");
 
-            }
-            System.out.println("\nTotal value: " + handValue);
-            return handValue;
         }
-        //So in the classic variation of blackjack, the dealer is supposed to hit until he reaches 17 or more.
-        //Even if the player has a higher value, the dealer must abide by this rule which will give the player a chance to win.
-        //Of-course we will make the dealer harder to beat as the money value of the player increases, he might even cheat ;).
-        public void dealerTurn () {
+        System.out.println("\nTotal value: " + handValue);
+        return handValue;
+    }
+    //So in the classic variation of blackjack, the dealer is supposed to hit until he reaches 17 or more.
+    //Even if the player has a higher value, the dealer must abide by this rule which will give the player a chance to win.
+    //Of-course we will make the dealer harder to beat as the money value of the player increases, he might even cheat ;).
+    public void dealerTurn () {
 
         if(dealerHandValue() <= DEALER_RULE) {
             dealerHandValue();
@@ -99,18 +99,18 @@ public class BlackJackMethods {
             System.out.println("The dealer has decided to stand");
         }
 
-        }
+    }
 
-        public int dealerHandValue () {
-            int dealerHandValue = hit();
-            System.out.println("The hand of the dealer contains: ");
-            for (int i = 0; i < dealerHand.size(); i++) {
-                Card c = dealerHand.get(i);
-                dealerHandValue += c.getValue();
-                System.out.println(c.getRank() + " of " + c.getSuit());
-            }
-            return dealerHandValue();
+    public int dealerHandValue () {
+        int dealerHandValue = hit();
+        System.out.println("The hand of the dealer contains: ");
+        for (int i = 0; i < dealerHand.size(); i++) {
+            Card c = dealerHand.get(i);
+            dealerHandValue += c.getValue();
+            System.out.println(c.getRank() + " of " + c.getSuit());
         }
+        return dealerHandValue();
+    }
 
     public int aceCheck(Stack<Card> playerHand) {
         int value = 0;
@@ -139,7 +139,7 @@ public class BlackJackMethods {
         // If there are still Aces in the hand, and the total value is less than or equal to 11,
         // count the next Ace as 11 instead of 1
         while (numAces > 0 && value <= 11) {
-            
+
             numAces--;
         }
 
@@ -158,5 +158,3 @@ public class BlackJackMethods {
 
 
 }
-
-
