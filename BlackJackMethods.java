@@ -88,10 +88,9 @@ public class BlackJackMethods {
             System.out.println("\nTotal value: " + handValue);
             return handValue;
         }
-
         //So in the classic variation of blackjack, the dealer is supposed to hit until he reaches 17 or more.
         //Even if the player has a higher value, the dealer must abide by this rule which will give the player a chance to win.
-        //Of course we will make the dealer harder to beat as the money value of the player increases, he might even cheat ;).
+        //Of-course we will make the dealer harder to beat as the money value of the player increases, he might even cheat ;).
         public void dealerTurn () {
 
         if(dealerHandValue() <= DEALER_RULE) {
