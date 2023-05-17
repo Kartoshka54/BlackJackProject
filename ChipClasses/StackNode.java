@@ -51,4 +51,6 @@ public class StackNode {
     public StackNode getLink(){
         return this.link;
     }
+
+
 }
