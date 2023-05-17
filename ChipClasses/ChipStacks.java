@@ -5,8 +5,7 @@ import ChipClasses.StackNode;
 
 public class ChipStacks {
     // for low to high ?
-    // 1 valued chips ??
-    private final StackLinkedList[] chipStacksArray = new StackLinkedList[7];
+    private static final StackLinkedList[] chipStacksArray = new StackLinkedList[7];
     private final int[] chipValuesOfTheStacks = {5, 10, 25, 50, 100, 500, 1000};
 
     // To initialize the player chip stacks with proper values and starting quantity.
@@ -35,6 +34,12 @@ public class ChipStacks {
         for(int i = 0; i< 2; i++){
             chipStacksArray[6].push(new StackNode(1000));
         }
+    }
+    // To reset the stacks.
+    public static void resetStacks(ChipStacks chipStack){
+       for (int i = 0; i < chipStacksArray.length; i++){
+           chipStacksArray[i].initializeStack();
+       }
     }
 
     // To calculate the total money the player has.
