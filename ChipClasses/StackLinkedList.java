@@ -41,6 +41,11 @@ public class StackLinkedList {
          public int getCount(){
              return this.count;
          }
+    // To initialize the stack.
+    public void initializeStack()
+    {
+        top = null;
+    }
          //Returning the value of the chips in the stack.
 
 
