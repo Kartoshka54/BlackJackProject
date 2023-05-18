@@ -37,11 +37,11 @@ public class ChipStacks{
     }
     // To reset the stacks.
     public void resetStacks(){
-        for (int i = 0; i < chipStacksArray.length; i++){
-            while(chipStacksArray[i].getCount() != 0){
-                chipStacksArray[i].pop();
-            }
-        }
+       for (int i = 0; i < chipStacksArray.length; i++){
+           while(chipStacksArray[i].getCount() != 0){
+               chipStacksArray[i].pop();
+           }
+       }
     }
 
     // To calculate the total money the player has.
