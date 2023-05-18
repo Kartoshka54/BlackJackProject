@@ -182,8 +182,10 @@ public class BlackJackMethods {
                 if(chipCount*chipValue > chipStack.total()) {
                     System.out.println("You cannot afford this bet please enter new values.");
                     continue;
-                }else{
-
+                } else if (chipCount > chipStack.findTheStackOfTheChip(chipValue).getCount()) {
+                    
+                } else{
+                    System.out.println("Your bet is " + chipCount*chipValue);
                 }
             }
         }
