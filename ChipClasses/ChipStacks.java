@@ -3,9 +3,9 @@ package ChipClasses;
 import ChipClasses.StackLinkedList;
 import ChipClasses.StackNode;
 
-public class ChipStacks {
+public class ChipStacks{
     // for low to high ?
-    private static final StackLinkedList[] chipStacksArray = new StackLinkedList[7];
+    private final StackLinkedList[] chipStacksArray = new StackLinkedList[7];
     private final int[] chipValuesOfTheStacks = {5, 10, 25, 50, 100, 500, 1000};
 
     // To initialize the player chip stacks with proper values and starting quantity.
@@ -36,10 +36,12 @@ public class ChipStacks {
         }
     }
     // To reset the stacks.
-    public static void resetStacks(ChipStacks chipStack){
-       for (int i = 0; i < chipStacksArray.length; i++){
-           chipStacksArray[i].initializeStack();
-       }
+    public void resetStacks(){
+        for (int i = 0; i < chipStacksArray.length; i++){
+            while(chipStacksArray[i].getCount() != 0){
+                chipStacksArray[i].pop();
+            }
+        }
     }
 
     // To calculate the total money the player has.
@@ -73,6 +75,7 @@ public class ChipStacks {
             popChipFromStackByValue(25);
             pushChipToStackByValue(10,2);
             pushChipToStackByValue(5,1);
+            System.out.println("Successfully converted " + highValue + " valued chips to " + lowValue + " valued chips.");
         }else if(lowValue > highValue || highValue % lowValue != 0){
             System.out.println("This calculation is not possible.");
         }
@@ -84,7 +87,7 @@ public class ChipStacks {
                 newChipCount = highValue/lowValue;
                 popChipFromStackByValue(highValue);
                 pushChipToStackByValue(lowValue,newChipCount);
-                System.out.println("Successfully converted from " + highValue + " chips to " + lowValue + " chips.");
+                System.out.println("Successfully converted " + highValue + " valued chips to " + lowValue + " valued chips.");
             }
         }
     }
@@ -113,6 +116,7 @@ public class ChipStacks {
                     chipCountNeededFromLowValueStack--;
                 }
                 highValueStack.push(new StackNode(highValue));
+                System.out.println("Successfully converted " + lowValue + " valued chips to " + highValue + " valued chips.");
             }
         }
     }

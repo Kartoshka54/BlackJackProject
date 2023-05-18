@@ -150,22 +150,22 @@ public class BlackJackMethods {
     public int betPlace () {
         System.out.println("WELCOME! WELCOME!, please place your bets ladies and gentleman");
 
-            chipStacks.displayChipCountsByStacks();
-            System.out.println("Balance: " + chipStacks.total());
-            int bet;
+        chipStacks.displayChipCountsByStacks();
+        System.out.println("Balance: " + chipStacks.total());
+        int bet;
 
-            while(true){
-                bet  = sc.nextInt();
-                if (bet > chipStacks.total()){
-                    System.out.println("Your balance is not enough for this bet!");
-                    System.out.println("Balance: " + chipStacks.total());
-                }
-                else{
-
-                }
+        while(true){
+            bet  = sc.nextInt();
+            if (bet > chipStacks.total()){
+                System.out.println("Your balance is not enough for this bet!");
+                System.out.println("Balance: " + chipStacks.total());
             }
+            else{
 
+            }
         }
+
+    }
 
     public int chipSelector(ChipStacks chipStack, ChipStacks betStack){
         int chipValue;
