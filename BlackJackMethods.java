@@ -25,7 +25,8 @@ public class BlackJackMethods {
             playerTurn.enqueue("player");
             betStacks.resetStacks();
             bet(chipStacks, betStacks);
-            System.out.println("The bets are made, the game will now begin!");
+            System.out.println("The bets are made, I repeat, the bets are made!!!!!\n" +
+                    "___________________________________________________________");
             playerHit();
             dealerHit();
 
@@ -44,7 +45,7 @@ public class BlackJackMethods {
                         playerTurn.deleteQueue();
                         playerTurn.enqueue("dealer");
                     } else {
-                        System.out.println("Invalid input, try again.");
+                        System.out.println("Not valid, can't you read? Try again!");
                     }
                 }
                 if (playerTurn.getFront().equals("dealer")) {
@@ -88,7 +89,8 @@ public class BlackJackMethods {
                 System.out.println("\t" + c.getRank() + " of " + c.getSuit());
 
             }
-            System.out.println("\nTotal hand value of the player: " + handValue);
+            System.out.println("\nTotal hand value of the player: " + handValue +
+                    "\n___________________________________________________________");
             return handValue;
         }
         //So in the classic variation of blackjack, the dealer is supposed to hit until he reaches 17 or more.
@@ -105,9 +107,10 @@ public class BlackJackMethods {
                     Card card = dealerHand.get(i);
                     System.out.println("\t" + card.getRank() + " of " + card.getSuit());
                 }
-                System.out.println("Total hand value of the dealer: " + handValue);
+                System.out.println("Total hand value of the dealer: " + handValue +
+                        "\n___________________________________________________________");
             }else {
-                System.out.println("The dealer has decided to stand");
+                System.out.println("The dealer has decided to stand, it's gettin hot here!");
             }
         }
 
@@ -161,11 +164,11 @@ public class BlackJackMethods {
         while(true){
             System.out.println("Total amount you have: " + chipStack.total());
             chipStack.displayChipCountsByStacks();
-            System.out.println("Which chip value do you want to place?");
+            System.out.println("Select the chip value to be placed!");
             chipValue = chipPlacer();
             chipCount = chipCountController(chipStack,chipValue);
             if(chipCount*chipValue > chipStack.total()) {
-                System.out.println("You cannot afford this bet please enter new values.");
+                System.out.println("Sorry pal, not enough chips for this.");
             } else if (chipCount > chipStack.findTheStackOfTheChip(chipValue).getCount()) {
                 System.out.println("You want to place " + chipCount + " chip/s from " + chipValue + " valued chip stack but you have "
                         + chipStack.findTheStackOfTheChip(chipValue).getCount() + " chips in that stack!");
@@ -178,7 +181,8 @@ public class BlackJackMethods {
                 betStack.pushChipToStackByValue(chipValue,chipCount);
                 totalBet += chipCount*chipValue;
                 System.out.println("Your bet is " + totalBet);
-                System.out.println("Do you want to place more bet ? y/n");
+                System.out.println("Do you want to increase your bet? y/n\n" +
+                        "______________________________________________________");
                 String choice;
                 while(true) {
                     choice = sc.next();
@@ -192,9 +196,10 @@ public class BlackJackMethods {
                 if (choice.equals("y")) {
                     continue;
                 }
-                    System.out.println("Total left: " + chipStack.total());
+                    System.out.println("Total left: " + chipStack.total() + "" +
+                            "\n______________________________________________________");
                     System.out.println("Your final bet: " + totalBet);
-                    System.out.println("Bet on the board: ");
+                    System.out.println("Bet on the board: \n");
                     betStack.displayChipCountsByStacks();
                     break;
             }
