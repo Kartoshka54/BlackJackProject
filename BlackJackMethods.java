@@ -20,24 +20,22 @@ public class BlackJackMethods {
         public void turnOrder(String player, String dealer) {
             Qll playerTurn = new Qll();
             playerTurn.enqueue("player");
-
-            playerHand.clear();
-            dealerHand.clear();
-
+            betStacks.resetStacks();
+            chipSelector(chipStacks, betStacks);
+            System.out.println("The bets are made, the game will now begin!");
             playerHit();
             dealerHit();
 
-
-            while (chipStacks.total() > 0) {
+            while (chipStacks.total() > 0 ) {
+                int currentHandValue = 0;
                 if (playerTurn.getFront().equals("player")) {
                     System.out.println("It is your turn, hit or stand? (h/s)");
                     String choice = sc.nextLine();
                     if (choice.equals("h")) {
-                        playerHandValue();
+                        currentHandValue = playerHandValue();
                         aceCheck(playerHand);
                         playerTurn.deleteQueue();
                         playerTurn.enqueue("dealer");
-                        winConditionCheck();
                     } else if (choice.equals("s")) {
                         stand();
                         playerTurn.deleteQueue();
@@ -52,8 +50,11 @@ public class BlackJackMethods {
                     playerTurn.deleteQueue();
                     playerTurn.enqueue("player");
                 }
+
+                winConditionCheck(currentHandValue); // Check win condition after each turn
             }
         }
+
 
 
     //Hit method for the player, used to draw cards from the deck
@@ -295,25 +296,43 @@ public class BlackJackMethods {
         return chipValue;
     }
 
-    public void winConditionCheck () {
-        if (playerHandValue() == WIN_CONDITION && playerHandValue() != dealerHandValue()) {
+    public boolean winConditionCheck (int handValue) {
+        if (handValue == WIN_CONDITION && handValue != dealerHandValue()) {
             System.out.println("High and a winner! Got a hot hand, hot hand, hot hand!");
-        } else if (dealerHandValue() == WIN_CONDITION && playerHandValue() != dealerHandValue()) {
+
+            playerHand.clear();
+            dealerHand.clear();
+            return false;
+        } else if (dealerHandValue() == WIN_CONDITION && handValue != dealerHandValue()) {
             System.out.println("The dealer has won! And takes the money straight back to the house!");
+            playerHand.clear();
+            dealerHand.clear();
+            return false;
         }
-        else if(playerHandValue() > WIN_CONDITION) {
+        else if(handValue > WIN_CONDITION) {
             System.out.println("Bust, bust, bust! Ladies and gentleman the player has busted!");
+            playerHand.clear();
+            dealerHand.clear();
+            return false;
         } else if (dealerHandValue() > WIN_CONDITION) {
             System.out.println("The house has lost! Revenge will follow soon!");
+            playerHand.clear();
+            dealerHand.clear();
+            return false;
 
-        } else if (playerHandValue() == dealerHandValue()) {
+        } else if (handValue == dealerHandValue()) {
             System.out.println("It's a tie! Tie! Tie!!!!");
+            playerHand.clear();
+            dealerHand.clear();
+            return false;
         }
-        else if (playerHandValue() != WIN_CONDITION && dealerHandValue() != WIN_CONDITION && playerHandValue() > WIN_CONDITION && dealerHandValue() > WIN_CONDITION) {
+        else if (handValue != WIN_CONDITION && dealerHandValue() != WIN_CONDITION && handValue > WIN_CONDITION && dealerHandValue() > WIN_CONDITION) {
             System.out.println("Nobody wins, nobody loses. It's a push!!!");
+            playerHand.clear();
+            dealerHand.clear();
+            return false;
         }
-
+        return true;
     }
-
 }
 
