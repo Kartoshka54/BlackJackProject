@@ -10,6 +10,7 @@ public class BlackJackMethods {
 
         Scanner sc = new Scanner(System.in);
         ChipStacks chipStacks = new ChipStacks();
+        ChipStacks betStacks = new ChipStacks();
         Deck deck = new Deck();
         Stack<Card> playerHand = new Stack<>();
         Stack<Card> dealerHand = new Stack<>();
@@ -30,7 +31,7 @@ public class BlackJackMethods {
                 int currentHandValue = 0;
                 if (playerTurn.getFront().equals("player")) {
                     System.out.println("It is your turn, hit or stand? (h/s)");
-                    String choice = sc.nextLine();
+                    String choice = sc.next();
                     if (choice.equals("h")) {
                         currentHandValue = playerHandValue();
                         aceCheck(playerHand);
@@ -148,26 +149,6 @@ public class BlackJackMethods {
             return value;
         }
 
-    public int betPlace () {
-        System.out.println("WELCOME! WELCOME!, please place your bets ladies and gentleman");
-
-        chipStacks.displayChipCountsByStacks();
-        System.out.println("Balance: " + chipStacks.total());
-        int bet;
-
-        while(true){
-            bet  = sc.nextInt();
-            if (bet > chipStacks.total()){
-                System.out.println("Your balance is not enough for this bet!");
-                System.out.println("Balance: " + chipStacks.total());
-            }
-            else{
-
-            }
-        }
-
-    }
-
     public int chipSelector(ChipStacks chipStack, ChipStacks betStack){
         int chipValue;
         int chipCount;
@@ -177,10 +158,7 @@ public class BlackJackMethods {
             chipStack.displayChipCountsByStacks();
             System.out.println("Which chip value do you want to place?");
             chipValue = chipPlacer();
-            System.out.println("How many chips do you want to place?");
-            System.out.println("Current chip value: " + chipValue);
-            chipStack.displayChipCountsByStacks();
-            chipCount = sc.nextInt();
+            chipCount = chipCountController(chipStack,chipValue);
             if(chipCount*chipValue > chipStack.total()) {
                 System.out.println("You cannot afford this bet please enter new values.");
             } else if (chipCount > chipStack.findTheStackOfTheChip(chipValue).getCount()) {
@@ -218,16 +196,25 @@ public class BlackJackMethods {
                 totalBet += chipCount*chipValue;
                 System.out.println("Your bet is " + totalBet);
                 System.out.println("Do you want to place more bet ? y/n");
-                String choice = sc.next();;
-                if (choice.equals("y")){
-                    continue;
-                }else if (choice.equals("n")){
-                    System.out.println("Total left: " + chipStack.total());
-                    System.out.println("Your final bet: " + totalBet);
-                    System.out.println("Bet on the board: ");
-                    betStack.displayChipCountsByStacks();
-                    break;
+                String betChoice;
+                while(true) {
+                    betChoice = sc.next();
+                    if(betChoice.equals("y")||betChoice.equals("n")){
+                        break;
+                    }
+                    else {
+                        System.out.println("Enter a valid value! y/n");
+                    }
                 }
+                if (betChoice.equals("y")) {
+                    continue;
+                }
+                System.out.println("Total left: " + chipStack.total());
+                System.out.println("Your final bet: " + totalBet);
+                System.out.println("Bet on the board: ");
+                betStack.displayChipCountsByStacks();
+                break;
+
             }
         }
         return totalBet;
@@ -253,9 +240,19 @@ public class BlackJackMethods {
         }
         return -1;
     }*/
-    public int chipCase(){
-        System.out.println("1- 5\n2- 10\n3- 25\n4- 50\n5- 100\n6- 500\n7- 1000");
-        int chipCase = sc.nextInt();
+    public int chipCase() {
+        int chipCase;
+        do {
+            System.out.println("1- 5\n2- 10\n3- 25\n4- 50\n5- 100\n6- 500\n7- 1000");
+            try {
+                chipCase = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("Please enter a value between 1-7 (not as string)");
+                sc.next();
+            }
+        }while(true);
+
         int  chips;
         switch (chipCase) {
             case 1:
@@ -294,6 +291,23 @@ public class BlackJackMethods {
                 System.out.println("This is not a valid option!");
         }
         return chipValue;
+    }
+
+    public int chipCountController(ChipStacks chipStack, int chipValue){
+        int chipCount;
+        System.out.println("How many chips do you want to place?");
+        System.out.println("Current chip value: " + chipValue);
+        chipStack.displayChipCountsByStacks();
+        do{
+            try{
+                chipCount = sc.nextInt();
+                break;
+            }catch (Exception e){
+                System.out.println("Enter an integer value! ");
+                sc.next();
+            }
+        }while(true);
+        return chipCount;
     }
 
     public boolean winConditionCheck (int handValue) {

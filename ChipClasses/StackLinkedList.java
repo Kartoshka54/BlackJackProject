@@ -1,11 +1,6 @@
 package ChipClasses;
 
 public class StackLinkedList {
-    //add chip sum
-    //write a method to count the chip values; 300x2, 500x4 etc.
-    //chip converter ?
-    //5,10,25,50,100,500,1000.
-    // null point exception for getvalue method !!
     private StackNode top;
     private int count;
 
@@ -38,15 +33,20 @@ public class StackLinkedList {
         }
     }
     // Total number of chips in a chip stack.
-         public int getCount(){
-             return this.count;
-         }
-    // To initialize the stack.
-    public void initializeStack()
-    {
-        top = null;
+    public int getCount(){
+        return this.count;
     }
-         //Returning the value of the chips in the stack.
+    // To initialize the stack.
+
+
+    /*public void initializeStack()
+    {
+        this.top = null;
+    }*/
+
+
+
+    //Returning the value of the chips in the stack.
 
 
  /*       public int getValue(){
@@ -55,7 +55,7 @@ public class StackLinkedList {
            }
 */
 
-        }
+}
 
 
 

@@ -1,9 +1,9 @@
 package ChipClasses;
 
 public class StackNode {
-// Stack node is going to be used in singly linked stack data structure hence there is only one link instance.
+    // Stack node is going to be used in singly linked stack data structure hence there is only one link instance.
     private int chipValue; // chipValue instance is going to be used to store the value of the chips as integer values.
-                          // Chip values are going to be 5,10,25,50,100,200,300,500,1000.
+    // Chip values are going to be 5,10,25,50,100,200,300,500,1000.
     private StackNode link; // link instance is going to be used to connect the nodes in the stack structure.
 
     /*There are 4 different type of ChipClasses.StackNode constructor each of which can be used in different scenarios when needed.
@@ -20,8 +20,8 @@ public class StackNode {
     }
     //2nd constructor
     public StackNode(int chipValue){
-       setChipValue(chipValue);
-       setLink(null);
+        setChipValue(chipValue);
+        setLink(null);
     }
     //3rd constructor
     public StackNode(StackNode link){
