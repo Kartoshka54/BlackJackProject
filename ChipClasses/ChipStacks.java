@@ -57,6 +57,7 @@ public class ChipStacks{
         return sum;
     }
     public void popFromOnePushToOther(ChipStacks playerStacks, ChipStacks betStacks, int times){
+        int initialTotal = playerStacks.total();
         for(int i = 0; i < chipStacksArray.length; i++){
             if(!betStacks.chipStacksArray[i].isEmpty()){
                 while(!betStacks.chipStacksArray[i].isEmpty()){
@@ -65,6 +66,7 @@ public class ChipStacks{
                 }
             }
         }
+        System.out.println(playerStacks.total() - initialTotal + " valued chip gained.\nNew total is: " + playerStacks.total() );
     }
     // To show to the player how many chips do they have from every chip stack.
     public void displayChipCountsByStacks(){

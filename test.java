@@ -13,7 +13,7 @@ public class test {
         System.out.println(chipStacks.total());
         chipStacks.displayChipCountsByStacks();
         System.out.println("---------------------------------------------------------");
-        chipStacks.popFromOnePushToOther(chipStacks,betStack,1);
+        chipStacks.popFromOnePushToOther(chipStacks,betStack,2);
 
         System.out.println("player stacks");
         System.out.println(chipStacks.total());

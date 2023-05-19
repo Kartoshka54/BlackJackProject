@@ -196,17 +196,6 @@ public class BlackJackMethods {
                 totalBet += chipCount*chipValue;
                 System.out.println("Your bet is " + totalBet);
                 System.out.println("Do you want to place more bet ? y/n");
-                String betChoice;
-                while(true) {
-                    betChoice = sc.next();
-                    if(betChoice.equals("y")||betChoice.equals("n")){
-                        break;
-                    }
-                    else {
-                        System.out.println("Enter a valid value! y/n");
-                    }
-                }
-                if (betChoice.equals("y")) {
                 String choice;
                 while(true) {
                     choice = sc.next();
@@ -220,19 +209,11 @@ public class BlackJackMethods {
                 if (choice.equals("y")) {
                     continue;
                 }
-                System.out.println("Total left: " + chipStack.total());
-                System.out.println("Your final bet: " + totalBet);
-                System.out.println("Bet on the board: ");
-                betStack.displayChipCountsByStacks();
-                break;
-
-                }
                     System.out.println("Total left: " + chipStack.total());
                     System.out.println("Your final bet: " + totalBet);
                     System.out.println("Bet on the board: ");
                     betStack.displayChipCountsByStacks();
                     break;
-
             }
         }
         return totalBet;
