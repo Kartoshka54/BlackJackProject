@@ -310,6 +310,22 @@ public class BlackJackMethods {
         }
         return chipValue;
     }
+    public int chipCountController(ChipStacks chipStack, int chipValue){
+        int chipCount;
+        System.out.println("How many chips do you want to place?");
+        System.out.println("Current chip value: " + chipValue);
+        chipStack.displayChipCountsByStacks();
+        do{
+            try{
+                chipCount = sc.nextInt();
+                break;
+            }catch (Exception e){
+                System.out.println("Enter an integer value! ");
+                sc.next();
+            }
+        }while(true);
+        return chipCount;
+    }
 
     public boolean winConditionCheck (int handValue) {
         if (playerHandValue() == WIN_CONDITION && playerHandValue() != dealerHandValue()) {
