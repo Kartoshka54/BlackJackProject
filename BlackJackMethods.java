@@ -24,7 +24,7 @@ public class BlackJackMethods {
             Qll playerTurn = new Qll();
             playerTurn.enqueue("player");
             betStacks.resetStacks();
-            chipSelector(chipStacks, betStacks);
+            bet(chipStacks, betStacks);
             System.out.println("The bets are made, the game will now begin!");
             playerHit();
             dealerHit();
@@ -154,7 +154,7 @@ public class BlackJackMethods {
             return value;
         }
 
-    public int chipSelector(ChipStacks chipStack, ChipStacks betStack){
+    public int bet(ChipStacks chipStack, ChipStacks betStack){
         int chipValue;
         int chipCount;
         int totalBet = 0;
@@ -170,29 +170,7 @@ public class BlackJackMethods {
                 System.out.println("You want to place " + chipCount + " chip/s from " + chipValue + " valued chip stack but you have "
                         + chipStack.findTheStackOfTheChip(chipValue).getCount() + " chips in that stack!");
 
-                while(true) {
-                    System.out.println("Do you want to convert some chips to " + chipValue + "? y/n");
-                    String response = sc.next();
-                    if (response.equals("y")) {
-                        while(true) {
-                            System.out.println("Which value do you want to convert? ");
-                            int valueToBeConverted = chipPlacer();
-                            if (valueToBeConverted > chipValue) {
-                                chipStack.converterHighToLow(valueToBeConverted, chipValue);
-                                break;
-                            } else if (valueToBeConverted < chipValue) {
-                                chipStack.convertLowToHigh(valueToBeConverted, chipValue);
-                                break;
-                            } else {
-                                System.out.println("This operation is not possible.");
-                            }
-                        }
-                    } else if (response.equals("n")) {
-                        break;
-                    } else {
-                        System.out.println("This is not a valid option! y/n");
-                    }
-                }
+                chipConverter(chipStack,chipValue);
             } else{
                 for(int i = 0; i < chipCount; i++){
                     chipStack.popChipFromStackByValue(chipValue);
@@ -312,6 +290,31 @@ public class BlackJackMethods {
         }while(true);
         return chipCount;
     }
+    public void chipConverter(ChipStacks chipStack, int chipValue){
+        while(true) {
+            System.out.println("Do you want to convert some chips to " + chipValue + "? y/n");
+            String response = sc.next();
+            if (response.equals("y")) {
+                while(true) {
+                    System.out.println("Which value do you want to convert? ");
+                    int valueToBeConverted = chipPlacer();
+                    if (valueToBeConverted > chipValue) {
+                        chipStack.converterHighToLow(valueToBeConverted, chipValue);
+                        break;
+                    } else if (valueToBeConverted < chipValue) {
+                        chipStack.convertLowToHigh(valueToBeConverted, chipValue);
+                        break;
+                    } else {
+                        System.out.println("This operation is not possible.");
+                    }
+                }
+            } else if (response.equals("n")) {
+                break;
+            } else {
+                System.out.println("This is not a valid option! y/n");
+            }
+        }
+    }
 
     public boolean winConditionCheck (int handValue, ChipStacks playerStack, ChipStacks dealerStack) {
         if (handValue == WIN_CONDITION && handValue != dealerHandValue()) {
@@ -325,7 +328,10 @@ public class BlackJackMethods {
             }
             return false;
         } else if (dealerHandValue() == WIN_CONDITION && handValue != dealerHandValue()) {
-            System.out.println("The dealer has won! And takes the money straight back to the house!");
+            System.out.println("The dealer has won! And takes the money straight back to the house!\n");
+            System.out.println("You lost " + betStacks.total() + " valued chips.");
+            dealerStack.resetStacks();
+            System.out.println("New total is: " + playerStack.total());
             playerHand.clear();
             dealerHand.clear();
             if(turnCount >= 1) {
@@ -336,6 +342,9 @@ public class BlackJackMethods {
         }
         else if(handValue > WIN_CONDITION) {
             System.out.println("Bust, bust, bust! Ladies and gentleman the player has busted!");
+            System.out.println("You lost " + betStacks.total() + " valued chips.");
+            dealerStack.resetStacks();
+            System.out.println("New total is: " + playerStack.total());
             playerHand.clear();
             dealerHand.clear();
             if(turnCount >= 1) {
@@ -345,6 +354,7 @@ public class BlackJackMethods {
             return false;
         } else if (dealerHandValue() > WIN_CONDITION) {
             System.out.println("The house has lost! Revenge will follow soon!");
+            chipStacks.popFromOnePushToOther(playerStack,dealerStack,2);
             playerHand.clear();
             dealerHand.clear();
             if(turnCount >= 1) {
@@ -355,6 +365,7 @@ public class BlackJackMethods {
 
         } else if (handValue == dealerHandValue() && turnCount > 2) {
             System.out.println("It's a tie! Tie! Tie!!!!");
+            chipStacks.popFromOnePushToOther(playerStack,dealerStack,1);
             playerHand.clear();
             dealerHand.clear();
             if(turnCount >= 1) {
@@ -365,6 +376,7 @@ public class BlackJackMethods {
         }
         else if (handValue != WIN_CONDITION && dealerHandValue() != WIN_CONDITION && handValue > WIN_CONDITION && dealerHandValue() > WIN_CONDITION) {
             System.out.println("Nobody wins, nobody loses. It's a push!!!");
+            chipStacks.popFromOnePushToOther(playerStack,dealerStack,1);
             playerHand.clear();
             dealerHand.clear();
             if(turnCount >= 1) {

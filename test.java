@@ -8,7 +8,7 @@ public class test {
         /*ChipStacks chipStacks = new ChipStacks();
         ChipStacks betStack = new ChipStacks();
         betStack.resetStacks();
-        bj.chipSelector(chipStacks,betStack);
+        bj.bet(chipStacks,betStack);
 
         System.out.println(chipStacks.total());
         chipStacks.displayChipCountsByStacks();
