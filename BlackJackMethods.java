@@ -207,6 +207,17 @@ public class BlackJackMethods {
                     }
                 }
                 if (betChoice.equals("y")) {
+                String choice;
+                while(true) {
+                    choice = sc.next();
+                    if(choice.equals("y")||choice.equals("n")){
+                        break;
+                    }
+                    else {
+                        System.out.println("Enter a valid value! y/n");
+                    }
+                }
+                if (choice.equals("y")) {
                     continue;
                 }
                 System.out.println("Total left: " + chipStack.total());
@@ -214,6 +225,13 @@ public class BlackJackMethods {
                 System.out.println("Bet on the board: ");
                 betStack.displayChipCountsByStacks();
                 break;
+
+                }
+                    System.out.println("Total left: " + chipStack.total());
+                    System.out.println("Your final bet: " + totalBet);
+                    System.out.println("Bet on the board: ");
+                    betStack.displayChipCountsByStacks();
+                    break;
 
             }
         }
@@ -293,25 +311,8 @@ public class BlackJackMethods {
         return chipValue;
     }
 
-    public int chipCountController(ChipStacks chipStack, int chipValue){
-        int chipCount;
-        System.out.println("How many chips do you want to place?");
-        System.out.println("Current chip value: " + chipValue);
-        chipStack.displayChipCountsByStacks();
-        do{
-            try{
-                chipCount = sc.nextInt();
-                break;
-            }catch (Exception e){
-                System.out.println("Enter an integer value! ");
-                sc.next();
-            }
-        }while(true);
-        return chipCount;
-    }
-
-    public boolean winConditionCheck (int handValue) {
-        if (handValue == WIN_CONDITION && handValue != dealerHandValue()) {
+    public void winConditionCheck (int handValue) {
+        if (playerHandValue() == WIN_CONDITION && playerHandValue() != dealerHandValue()) {
             System.out.println("High and a winner! Got a hot hand, hot hand, hot hand!");
 
             playerHand.clear();
