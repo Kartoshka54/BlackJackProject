@@ -311,7 +311,7 @@ public class BlackJackMethods {
         return chipValue;
     }
 
-    public void winConditionCheck (int handValue) {
+    public boolean winConditionCheck (int handValue) {
         if (playerHandValue() == WIN_CONDITION && playerHandValue() != dealerHandValue()) {
             System.out.println("High and a winner! Got a hot hand, hot hand, hot hand!");
 
