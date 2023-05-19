@@ -10,6 +10,18 @@ public class test {
         betStack.resetStacks();
         bj.chipSelector(chipStacks,betStack);
 
+        System.out.println(chipStacks.total());
+        chipStacks.displayChipCountsByStacks();
+        System.out.println("---------------------------------------------------------");
+        chipStacks.popFromOnePushToOther(chipStacks,betStack,1);
+
+        System.out.println("player stacks");
+        System.out.println(chipStacks.total());
+        chipStacks.displayChipCountsByStacks();
+        System.out.println("----------------------------------------------------------");
+        System.out.println("bet stacks");
+        betStack.displayChipCountsByStacks();
+
         //ChipStacks playerStack = new ChipStacks();
        // ChipStacks betStack = new ChipStacks();
         //betStack.resetStacks();
