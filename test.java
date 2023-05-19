@@ -3,9 +3,9 @@ import ChipClasses.ChipStacks;
 public class test {
     public static void main(String[] args) {
         BlackJackMethods bj = new BlackJackMethods();
-        //bj.turnOrder("player","dealer");
+        bj.turnOrder("player","dealer");
 
-        ChipStacks chipStacks = new ChipStacks();
+        /*ChipStacks chipStacks = new ChipStacks();
         ChipStacks betStack = new ChipStacks();
         betStack.resetStacks();
         bj.chipSelector(chipStacks,betStack);
@@ -20,7 +20,7 @@ public class test {
         chipStacks.displayChipCountsByStacks();
         System.out.println("----------------------------------------------------------");
         System.out.println("bet stacks");
-        betStack.displayChipCountsByStacks();
+        betStack.displayChipCountsByStacks();*/
 
         //ChipStacks playerStack = new ChipStacks();
        // ChipStacks betStack = new ChipStacks();
