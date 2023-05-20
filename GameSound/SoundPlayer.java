@@ -11,6 +11,9 @@ public class SoundPlayer {
     private int currentIndex;
     private boolean isLooping;
 
+    // Utilized code from https://stackoverflow.com/questions/2416935/how-to-play-wav-files-with-java
+    //Just a standard Java Sound API player. Nothing interesting here.
+    //I decided it would be funny to have a Soundtrack for the game.
     public SoundPlayer() {
         audioFileNames = new ArrayList<>();
         currentIndex = 0;

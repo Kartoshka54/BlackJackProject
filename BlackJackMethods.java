@@ -13,8 +13,13 @@ public class BlackJackMethods {
         ChipStacks betStacks = new ChipStacks();
         Deck deck = new Deck();
         Stack<Card> playerHand = new Stack<>();
+
+        //Here we decided to use the pre-written java stack class, to not heavily modify our own stack class.
         Stack<Card> dealerHand = new Stack<>();
-        private static final int WIN_CONDITION = 21;
+
+    //Some final statements to avoid magic numbers.
+
+    private static final int WIN_CONDITION = 21;
         private static final int DEALER_RULE = 17;
 
         private static final int PUSH_RULE = 22;
@@ -41,6 +46,8 @@ public class BlackJackMethods {
                     String choice = sc.next();
                     if (choice.equals("h")) {
                         currentHandValue = playerHandValue();
+                        //Here we made sure that the aceCheck method converts the ace value depending on the situation.
+                        //The stack is checked and if conditions are met, aces are converted to 1.
                         aceCheck(playerHand);
                         playerTurn.deleteQueue();
                         playerTurn.enqueue("dealer");
@@ -59,6 +66,8 @@ public class BlackJackMethods {
                     playerTurn.enqueue("player");
                 }
 
+                //turnCount is used here to help us draw 2 cards when the game starts and then going down to 1 card per turn.
+                //When the while loop reiterates, both the player and the dealer will again, draw 2 cards.
                 turnCount++;
                 if(!winConditionCheck(currentHandValue,chipStacks,betStacks)){
                     bet(chipStacks,betStacks);
@@ -68,13 +77,14 @@ public class BlackJackMethods {
 
 
 
-    //Hit method for the player, used to draw cards from the deck
+     //Hit method for the player, used to draw cards from the deck
         public int playerHit() {
             Card card = deck.draw();
             playerHand.push(card);
             return aceCheck(playerHand);
         }
 
+        //Same method but for the dealer
         public void dealerHit() {
             Card card = deck.draw();
             dealerHand.push(card);
@@ -84,7 +94,8 @@ public class BlackJackMethods {
         public void stand () {
             System.out.println("You have chosen to stand. Now only luck can save you!");
         }
-        //This method also converts the ace value
+
+        //The playerHandValue method both hits and prints the hand value of the player.
         public int playerHandValue () {
             int handValue = playerHit();
             System.out.println("Your hand contains: ");
@@ -99,10 +110,9 @@ public class BlackJackMethods {
         }
         //So in the classic variation of blackjack, the dealer is supposed to hit until he reaches 17 or more.
         //Even if the player has a higher value, the dealer must abide by this rule which will give the player a chance to win.
-        //Of-course we will make the dealer harder to beat as the money value of the player increases, he might even cheat ;).
         public void dealerTurn() {
             int handValue = dealerHandValue();
-            if (handValue <= DEALER_RULE) {
+            if (handValue < DEALER_RULE) {
                 dealerHit();
                 handValue = dealerHandValue();
 
@@ -211,26 +221,6 @@ public class BlackJackMethods {
         return totalBet;
     }
 
-    /*public int chipCase(){
-        System.out.println("1- 5\n2- 10\n3- 25\n4- 50\n5- 100\n6- 500\n7- 1000");
-        int chipCase = sc.nextInt();
-        if (chipCase == 1) {
-            return 5;
-        } else if (chipCase == 2) {
-            return 10;
-        } else if (chipCase == 3) {
-            return 25;
-        } else if (chipCase == 4) {
-            return 50;
-        } else if (chipCase == 5) {
-            return 100;
-        } else if (chipCase == 6) {
-            return 500;
-        } else if (chipCase == 7) {
-            return 1000;
-        }
-        return -1;
-    }*/
     public int chipCase() {
         int chipCase;
         do {
@@ -325,6 +315,8 @@ public class BlackJackMethods {
         }
     }
 
+    //I decided to separate the turnOrder and winConditionCheck methods
+    //Originally, I wanted to check the win conditions inside the while loop in turnOrder, but it was getting too messy.
     public boolean winConditionCheck (int handValue, ChipStacks playerStack, ChipStacks dealerStack) {
         if (handValue == WIN_CONDITION && handValue != dealerHandValue()) {
             System.out.println("\n__________________________________________________________" +
@@ -333,6 +325,8 @@ public class BlackJackMethods {
             chipStacks.popFromOnePushToOther(playerStack,dealerStack,2);
             playerHand.clear();
             dealerHand.clear();
+            //Now the turnCount helper which I have implemented above becomes handy.
+            //If the game continues after the first turn, the player and the dealer will again draw 2 cards
             if(turnCount >= 1) {
                 playerHit();
                 dealerHit();
@@ -340,8 +334,8 @@ public class BlackJackMethods {
             return false;
         } else if (dealerHandValue() == WIN_CONDITION && handValue != dealerHandValue()) {
             System.out.println("\n__________________________________________________________" +
-                    "The dealer has won! And takes the money straight back to the house!" +
-                    "\n__________________________________________________________");
+                    "\nThe dealer has won! And takes the money straight back to the house!\n" +
+                    "__________________________________________________________");
             System.out.println("You lost " + betStacks.total() + " valued chips.");
             dealerStack.resetStacks();
             System.out.println("New total is: " + playerStack.total());
@@ -393,6 +387,9 @@ public class BlackJackMethods {
             }
             return false;
         }
+        //I want to explain the last condition so, it becomes clear
+        //The casino rules are as followed: If the dealer busts with 22 and the player has a handValue less than 29
+        //The pot is split between the player and the dealer.
         else if (dealerHandValue() == PUSH_RULE && handValue <= PLAYER_CONDITION) {
             System.out.println("\n__________________________________________________________" +
                     "\nNobody wins, nobody loses. It's a push!!!\n" +

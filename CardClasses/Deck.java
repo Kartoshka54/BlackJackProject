@@ -47,7 +47,6 @@ public class Deck {
     }
 
     public Card draw () {
-        //This method draws a card from the deck. It will be used to give the player and dealer cards.
         Card card = cards.keySet().iterator().next();
         //We get the first card from the deck and remove it from the deck.
         // So we have no duplicates.

@@ -28,7 +28,6 @@ public class Card {
         this.suit = suit;
         this.rank = rank;
         if (rank.equals("Ace")) {
-            //In blackjack, the ace can be 1 or 11. We will define it as 11 for now.
             this.value = ACE_VALUE;
         } else if (rank.equals("King") || rank.equals("Queen") || rank.equals("Jack")) {
             //In blackjack, the king, queen and jack are all 10.

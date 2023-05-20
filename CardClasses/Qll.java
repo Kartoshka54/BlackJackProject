@@ -28,7 +28,7 @@ public class Qll {
         return rear.getTurn();
     }
     public void enqueue(String turn) {
-        QueueNode newNode = new QueueNode();//newNode is the new item that will be added to the queue
+        QueueNode newNode = new QueueNode();
         newNode.setTurn(turn);
         newNode.setLink(null);
         if (isEmpty()) {//checks if the queue is empty before enqueuing.
@@ -49,7 +49,7 @@ public class Qll {
                 rear = null;//If the front is null, the rear is also null because there is only 1 item in the queue
             }
         }
-        count--;//Decreases the count if the item is deleted.
+        count--;
     }
     public void printQueue () {
         QueueNode temp = front;
