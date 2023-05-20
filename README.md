@@ -11,10 +11,10 @@ How to play:
 1. Make sure you have Java installed on your computer ( you can check this by opening your CMD or Terminal and typing in "Java -version")
 
 
-2. Go to the file directory where you hava saved the files, go to BlackJack Project --> BlackJack --> src
+2. Go to the file directory where you have saved the files, go to BlackJack Project --> BlackJack --> src
 
 
 3. Press ALT + D in the src file path and type in CMD, when the CMD opens type "java BlackJackGame" 
 
 
-4. Congrats! Now the game should be running with the implemented soundtrack. Have fun playing :)!
+4. Congrats! Now the game should be running with the implemented Soundtrack. Have fun playing :)!
