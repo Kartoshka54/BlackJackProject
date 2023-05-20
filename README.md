@@ -14,7 +14,7 @@ How to play:
 2. Go to the file directory where you hava saved the files, go to BlackJack Project --> BlackJack --> src
 
 
-3. Press ALT + D in the src file path and type in CMD, when the CMD opens then type "java BlackJackGame" 
+3. Press ALT + D in the src file path and type in CMD, when the CMD opens type "java BlackJackGame" 
 
 
 4. Congrats! Now the game should be running with the implemented soundtrack. Have fun playing :)!
