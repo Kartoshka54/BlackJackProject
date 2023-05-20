@@ -39,7 +39,7 @@ public class BlackJackMethods {
             playerHit();
             dealerHit();
 
-            while (chipStacks.total() > 0 ) {
+            while (chipStacks.total() >= 0 ) {
                 int currentHandValue = 0;
                 if (playerTurn.getFront().equals("player")) {
                     System.out.println("It is your turn, hit or stand? (h/s)");
@@ -52,16 +52,20 @@ public class BlackJackMethods {
                         playerTurn.deleteQueue();
                         playerTurn.enqueue("dealer");
                     } else if (choice.equals("s")) {
-                        stand();
-                        playerTurn.deleteQueue();
-                        playerTurn.enqueue("dealer");
-                    } else {
-                        System.out.println("Not valid, can't you read? Try again!");
+                        if(dealerHandValue() >= DEALER_RULE) {
+                            System.out.println("The dealer is standing, you must play!");
+                        }
+                     else {
+                            stand();
+                            playerTurn.deleteQueue();
+                            playerTurn.enqueue("dealer");
+                        }
+
                     }
                 }
                 if (playerTurn.getFront().equals("dealer")) {
                     dealerTurn();
-                    aceCheck(dealerHand);
+                    dealerAceCheck(dealerHand);
                     playerTurn.deleteQueue();
                     playerTurn.enqueue("player");
                 }
@@ -171,6 +175,43 @@ public class BlackJackMethods {
             return value;
         }
 
+        //Same method but to print the message with dealer instead of player.
+    public int dealerAceCheck(Stack<Card> playerHand) {
+        int value = 0;
+        int numAces = 0;
+
+        // First pass through the hand, counting the total value and number of Aces
+        for (Card c : playerHand) {
+            value += c.getValue();
+            if (c.getRank().equals("Ace")) {
+                numAces++;
+            }
+        }
+
+        // Adjust the total value for any Aces that need to be counted as 1 instead of 11
+        while (numAces > 0 && value > 21) {
+            value -= 10;
+            if(numAces > 1) {
+                System.out.println("The dealer's Aces have been converted to 1");
+            } else {
+                System.out.println("The dealer's Ace has been converted to 1");
+            }
+
+            numAces--;
+        }
+
+        // If there are still Aces in the hand, and the total value is less than or equal to 11,
+        // count the next Ace as 11 instead of 1
+        while (numAces > 0 && value <= 11) {
+
+            numAces--;
+        }
+
+        return value;
+    }
+    // This is the main method that handles the bet system of the game.
+    //Placing bets, converting chips to another valued chips, asking the player whether they want to stop or continue to bet.
+    //Giving information about the total value the player has, the bet they placed and the total bet on the board.
     public int bet(ChipStacks chipStack, ChipStacks betStack){
         int chipValue;
         int chipCount;
@@ -378,12 +419,19 @@ public class BlackJackMethods {
             System.out.println("\n__________________________________________________________" +
                     "\nIt's a tie! Tie! Tie!!!!\n" +
                     "__________________________________________________________");
-            chipStacks.popFromOnePushToOther(playerStack,dealerStack,1);
-            playerHand.clear();
-            dealerHand.clear();
-            if(turnCount >= 1) {
-                playerHit();
-                dealerHit();
+            System.out.println("Do you want to split the bet, or do you want to continue? (continue/split)" );
+            String response = sc.next();
+            if(response.equals("continue")) {
+                System.out.println("The game continues!");
+            }
+            else {
+                chipStacks.popFromOnePushToOther(playerStack, dealerStack, 1);
+                playerHand.clear();
+                dealerHand.clear();
+                if (turnCount >= 1) {
+                    playerHit();
+                    dealerHit();
+                }
             }
             return false;
         }
