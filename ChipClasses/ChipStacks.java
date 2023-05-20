@@ -56,6 +56,7 @@ public class ChipStacks{
         }
         return sum;
     }
+    // This method makes it available to swap chips between two chip stacks.
     public void popFromOnePushToOther(ChipStacks playerStacks, ChipStacks betStacks, int times){
         int initialTotal = playerStacks.total();
         for(int i = 0; i < chipStacksArray.length; i++){

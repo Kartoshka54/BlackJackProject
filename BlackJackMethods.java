@@ -220,7 +220,7 @@ public class BlackJackMethods {
             System.out.println("Total amount you have: " + chipStack.total());
             chipStack.displayChipCountsByStacks();
             System.out.println("Select the chip value to be placed!");
-            chipValue = chipPlacer();
+            chipValue = chipPlacer(chipStacks);
             chipCount = chipCountController(chipStack,chipValue);
             if(chipCount*chipValue > chipStack.total()) {
                 System.out.println("Sorry pal, not enough chips for this.");
@@ -262,7 +262,9 @@ public class BlackJackMethods {
         return totalBet;
     }
 
-    public int chipCase() {
+    // This method provides the player to SELECT between different types of chips he/she has..
+    // Used in various methods in this class
+    public int chipCase(ChipStacks playerStacks) {
         int chipCase;
         do {
             System.out.println("1- 5\n2- 10\n3- 25\n4- 50\n5- 100\n6- 500\n7- 1000");
@@ -304,16 +306,19 @@ public class BlackJackMethods {
         }
         return chips;
     }
-
-    public int chipPlacer(){
+    // This method is used to determine which valued chip the player wants to PLACE on the board.
+    public int chipPlacer(ChipStacks playerStacks){
         int chipValue = -1;
         while(chipValue == -1) {
-            chipValue = chipCase();
-            if(chipValue == -1)
+            chipValue = chipCase(playerStacks);
+            if(chipValue == -1) {
                 System.out.println("This is not a valid option!");
+            }
         }
         return chipValue;
     }
+
+    // This method makes player to give an integer value as an input in order to place the previously determined chip value on the board.
     public int chipCountController(ChipStacks chipStack, int chipValue){
         int chipCount;
         System.out.println("How many chips do you want to place?");
@@ -330,6 +335,9 @@ public class BlackJackMethods {
         }while(true);
         return chipCount;
     }
+
+    // This method makes it available for player to convert between chip values he/she has in order to place the bet as he/she desires.
+    // Player can convert from a higher value or a lower value depending on the choice he/she makes.
     public void chipConverter(ChipStacks chipStack, int chipValue){
         while(true) {
             System.out.println("Do you want to convert some chips to " + chipValue + "? y/n");
@@ -337,7 +345,7 @@ public class BlackJackMethods {
             if (response.equals("y")) {
                 while(true) {
                     System.out.println("Which value do you want to convert? ");
-                    int valueToBeConverted = chipPlacer();
+                    int valueToBeConverted = chipPlacer(chipStacks);
                     if (valueToBeConverted > chipValue) {
                         chipStack.converterHighToLow(valueToBeConverted, chipValue);
                         break;
@@ -395,6 +403,10 @@ public class BlackJackMethods {
             System.out.println("You lost " + betStacks.total() + " valued chips.");
             dealerStack.resetStacks();
             System.out.println("New total is: " + playerStack.total());
+            if(playerStack.total() == 0){
+                System.out.println("You have no more chips to play with. Game over!");
+                System.exit(0);
+            }
             playerHand.clear();
             dealerHand.clear();
             if(turnCount >= 1) {
