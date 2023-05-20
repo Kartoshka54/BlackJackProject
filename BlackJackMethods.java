@@ -17,6 +17,9 @@ public class BlackJackMethods {
         private static final int WIN_CONDITION = 21;
         private static final int DEALER_RULE = 17;
 
+        private static final int PUSH_RULE = 22;
+        private static final int PLAYER_CONDITION = 29;
+
         int turnCount = 0;
 
         //This method will be used to determine the turn order.
@@ -25,8 +28,9 @@ public class BlackJackMethods {
             playerTurn.enqueue("player");
             betStacks.resetStacks();
             bet(chipStacks, betStacks);
-            System.out.println("The bets are made, I repeat, the bets are made!!!!!\n" +
-                    "___________________________________________________________");
+            System.out.println("\n____________________________________________________" +
+                    "\nThe bets are made, I repeat, the bets are made!!!!!\n" +
+                    "____________________________________________________");
             playerHit();
             dealerHit();
 
@@ -323,7 +327,9 @@ public class BlackJackMethods {
 
     public boolean winConditionCheck (int handValue, ChipStacks playerStack, ChipStacks dealerStack) {
         if (handValue == WIN_CONDITION && handValue != dealerHandValue()) {
-            System.out.println("High and a winner! Got a hot hand, hot hand, hot hand!");
+            System.out.println("\n__________________________________________________________" +
+                    "\nHigh and a winner! Got a hot hand, hot hand, hot hand!\n" +
+                    "__________________________________________________________");
             chipStacks.popFromOnePushToOther(playerStack,dealerStack,2);
             playerHand.clear();
             dealerHand.clear();
@@ -333,7 +339,9 @@ public class BlackJackMethods {
             }
             return false;
         } else if (dealerHandValue() == WIN_CONDITION && handValue != dealerHandValue()) {
-            System.out.println("The dealer has won! And takes the money straight back to the house!\n");
+            System.out.println("\n__________________________________________________________" +
+                    "The dealer has won! And takes the money straight back to the house!" +
+                    "\n__________________________________________________________");
             System.out.println("You lost " + betStacks.total() + " valued chips.");
             dealerStack.resetStacks();
             System.out.println("New total is: " + playerStack.total());
@@ -346,7 +354,9 @@ public class BlackJackMethods {
             return false;
         }
         else if(handValue > WIN_CONDITION) {
-            System.out.println("Bust, bust, bust! Ladies and gentleman the player has busted!");
+            System.out.println("\n_________________________________________________________" +
+                    "\nBust, bust, bust! Ladies and gentleman the player has busted!\n" +
+                    "__________________________________________________________");
             System.out.println("You lost " + betStacks.total() + " valued chips.");
             dealerStack.resetStacks();
             System.out.println("New total is: " + playerStack.total());
@@ -358,7 +368,9 @@ public class BlackJackMethods {
             }
             return false;
         } else if (dealerHandValue() > WIN_CONDITION) {
-            System.out.println("The house has lost! Revenge will follow soon!");
+            System.out.println("\n__________________________________________________________" +
+                    "\nThe house has lost! Revenge will follow soon!\n" +
+                    "__________________________________________________________");
             chipStacks.popFromOnePushToOther(playerStack,dealerStack,2);
             playerHand.clear();
             dealerHand.clear();
@@ -368,8 +380,10 @@ public class BlackJackMethods {
             }
             return false;
 
-        } else if (handValue == dealerHandValue() && turnCount > 2) {
-            System.out.println("It's a tie! Tie! Tie!!!!");
+        } else if (handValue == dealerHandValue() && turnCount > 1) {
+            System.out.println("\n__________________________________________________________" +
+                    "\nIt's a tie! Tie! Tie!!!!\n" +
+                    "__________________________________________________________");
             chipStacks.popFromOnePushToOther(playerStack,dealerStack,1);
             playerHand.clear();
             dealerHand.clear();
@@ -379,8 +393,10 @@ public class BlackJackMethods {
             }
             return false;
         }
-        else if (handValue != WIN_CONDITION && dealerHandValue() != WIN_CONDITION && handValue > WIN_CONDITION && dealerHandValue() > WIN_CONDITION) {
-            System.out.println("Nobody wins, nobody loses. It's a push!!!");
+        else if (dealerHandValue() == PUSH_RULE && handValue <= PLAYER_CONDITION) {
+            System.out.println("\n__________________________________________________________" +
+                    "\nNobody wins, nobody loses. It's a push!!!\n" +
+                    "__________________________________________________________");
             chipStacks.popFromOnePushToOther(playerStack,dealerStack,1);
             playerHand.clear();
             dealerHand.clear();
