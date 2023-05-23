@@ -15,18 +15,22 @@ public class Qll {
         front = null;
         rear = null;
     }
+
     public boolean isEmpty() {
         return (front == null);//A simple method to check if the queue is empty, we only need to check the front value
         //Because queues are FIFO (First in first out) data structures. So keeping track of the front node is enough.
         /*Also as a bonus, a FIFO data structure is a perfect fit for a queue in a card game. So we will have no issue
         with the order of the turns.*/
     }
+
     public String getFront() {
         return front.getTurn();
     }
+
     public String getRear() {
         return rear.getTurn();
     }
+
     public void enqueue(String turn) {
         QueueNode newNode = new QueueNode();
         newNode.setTurn(turn);
@@ -40,6 +44,7 @@ public class Qll {
         }
         count++;//Keeps track of added items and increments if the item is added
     }
+
     public void deleteQueue() {
         if (isEmpty()) {
             System.out.println("Queue is empty");//No need to delete if the structure is already empty
@@ -51,7 +56,8 @@ public class Qll {
         }
         count--;
     }
-    public void printQueue () {
+
+    public void printQueue() {
         QueueNode temp = front;
         while (temp != null) {//We need our temp helper here to traverse through the queue and print the items.
             System.out.println(temp.getTurn());

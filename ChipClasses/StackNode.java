@@ -14,25 +14,33 @@ public class StackNode {
                      ChipClasses.StackNode instance passed in the constructor.
     */
     //1st constructor
-    public StackNode(){
+    public StackNode() {
         setChipValue(0);
         setLink(null);
     }
+
     //2nd constructor
-    public StackNode(int chipValue){
+    public StackNode(int chipValue) {
         setChipValue(chipValue);
         setLink(null);
     }
+
     //3rd constructor
-    public StackNode(StackNode link){
+    public StackNode(StackNode link) {
         setChipValue(0);
         setLink(null);
     }
+
     //4th constructor
-    public StackNode(int chipValue, StackNode link){
+    public StackNode(int chipValue, StackNode link) {
         setChipValue(chipValue);
         setLink(link);
     }
+
+    public int getChipValue() {
+        return this.chipValue;
+    }
+
     /* get and set methods to obtain the values ChipClasses.StackNode instances have or change the data they contain while the
     program is being executed.
     */
@@ -40,16 +48,12 @@ public class StackNode {
         this.chipValue = chipValue;
     }
 
-    public int getChipValue(){
-        return this.chipValue;
+    public StackNode getLink() {
+        return this.link;
     }
 
     public void setLink(StackNode link) {
         this.link = link;
-    }
-
-    public StackNode getLink(){
-        return this.link;
     }
 
 

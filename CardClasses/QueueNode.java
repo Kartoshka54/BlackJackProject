@@ -8,6 +8,7 @@ public class QueueNode {
      */
     private String turn; //Our turn attribute is kept as a String value because we do not use this class for numeric values
     private QueueNode link;//Link attribute is used to keep track of the next node in the queue.
+
     //We decided that we will implement those structures as Singly Linked Lists because we only need 1 direction.
     public QueueNode() {
         turn = null;

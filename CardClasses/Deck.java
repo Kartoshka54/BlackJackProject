@@ -8,14 +8,15 @@ public class Deck {
     // It is a hashmap which has a card as a key and an integer as a value.
     //This is our deck.
 
-    public Map<Card, Integer> cards;
     //Avoid magic numbers
     public static final int NUM_SUITS = 4;
     public static final int NUM_RANKS = 13;
+    public Map<Card, Integer> cards;
+
     public Deck() {
         cards = new HashMap<>();
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
-        String[] ranks = {"Ace", "2", "3" , "4" , "5" , "6", "7" , "8" , "9" , "10", "Jack", "Queen", "King"};
+        String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
         //List created to use the pre-existing shuffle method in java.
         List<Card> shuffle = new ArrayList<>();
         for (int i = 0; i < NUM_SUITS; i++) {
@@ -46,7 +47,7 @@ public class Deck {
         return count;
     }
 
-    public Card draw () {
+    public Card draw() {
         Card card = cards.keySet().iterator().next();
         //We get the first card from the deck and remove it from the deck.
         // So we have no duplicates.
